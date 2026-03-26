@@ -2,7 +2,718 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gamma Iota Sigma</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Serif+Text:ital@0;1&family=Syne:wght@400;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #0A0A0A;
+  --paper: #F4F0E6;
+  --gold: #D4A800;
+  --gold-dark: #A07F00;
+  --rule: #0A0A0A;
+  --muted: #5A5550;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Serif Text', serif;
+  overflow-x: hidden;
+}
+
+/* ── MASTHEAD ── */
+.masthead {
+  border-bottom: 6px solid var(--ink);
+}
+
+.masthead-top {
+  background: var(--ink);
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.masthead-top span {
+  font-family: 'Syne Mono', monospace;
+  font-size: 11px;
+  color: var(--paper);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.masthead-main {
+  padding: 32px 40px 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  border-bottom: 3px solid var(--ink);
+}
+
+.masthead-left {
+  padding-bottom: 24px;
+}
+
+.masthead-left .edition {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.masthead-left p {
+  font-family: 'DM Serif Text', serif;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 280px;
+  color: var(--muted);
+}
+
+.masthead-center {
+  padding: 0 48px;
+  text-align: center;
+  border-left: 3px solid var(--ink);
+  border-right: 3px solid var(--ink);
+}
+
+.masthead-center h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(52px, 8vw, 108px);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -3px;
+  color: var(--ink);
+}
+
+.masthead-center h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.masthead-center .greek {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  letter-spacing: 8px;
+  color: var(--muted);
+  margin-top: 12px;
+  display: block;
+  padding-bottom: 20px;
+}
+
+.masthead-right {
+  padding-bottom: 24px;
+  text-align: right;
+}
+
+.masthead-right .nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.masthead-right a {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+  padding-bottom: 2px;
+}
+
+.masthead-right a:hover { border-color: var(--gold); color: var(--gold-dark); }
+
+/* ── HERO STRIP ── */
+.hero-strip {
+  background: var(--gold);
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 4px solid var(--ink);
+}
+
+.hero-strip .tagline {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(22px, 3.5vw, 42px);
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.hero-strip .cta-group {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.btn {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  text-decoration: none;
+  border: 3px solid var(--ink);
+  transition: all 0.2s;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn-dark { background: var(--ink); color: var(--paper); }
+.btn-dark:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 4px solid var(--ink);
+}
+
+.stat-cell {
+  padding: 32px 40px;
+  border-right: 3px solid var(--ink);
+}
+.stat-cell:last-child { border-right: none; }
+
+.stat-cell .num {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.stat-cell .num span { color: var(--gold); }
+
+.stat-cell .lbl {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* ── ABOUT ── */
+.about-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  border-bottom: 4px solid var(--ink);
+}
+
+.about-body {
+  padding: 56px 40px;
+  border-right: 3px solid var(--ink);
+}
+
+.section-label {
+  font-family: 'Syne Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--muted);
+  opacity: 0.4;
+}
+
+.about-body h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 28px;
+}
+
+.about-body h2 em { font-style: italic; color: var(--gold-dark); }
+
+.about-body p {
+  font-size: 17px;
+  line-height: 1.85;
+  color: #3A3530;
+  margin-bottom: 18px;
+  max-width: 600px;
+}
+
+.about-callout {
+  padding: 56px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--ink);
+}
+
+.about-callout p {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(18px, 2.5vw, 28px);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.about-callout .attr {
+  font-family: 'Syne Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0.5;
+}
+
+/* ── CAREERS ── */
+.careers-section { border-bottom: 4px solid var(--ink); }
+
+.careers-header {
+  padding: 40px 40px 32px;
+  border-bottom: 3px solid var(--ink);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 40px;
+  align-items: end;
+}
+
+.careers-header h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.careers-header h2 em { font-style: italic; color: var(--gold-dark); }
+
+.careers-header p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 480px;
+  align-self: end;
+}
+
+.career-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+}
+
+.career-card {
+  padding: 36px 32px;
+  border-right: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+  transition: background 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.career-card:nth-child(3n) { border-right: none; }
+.career-card:nth-last-child(-n+1) { border-bottom: none; }
+.career-card:nth-last-child(-n+2) { border-bottom: none; }
+.career-card:nth-last-child(-n+3) { border-bottom: none; }
+
+.career-card:hover { background: var(--gold); }
+.career-card:hover .career-salary { background: var(--ink); color: var(--gold); }
+
+.career-num { display: none; }
+
+.career-cat {
+  font-family: 'Syne Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.career-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+
+.career-salary {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  margin-bottom: 16px;
+  transition: all 0.2s;
+}
+
+.career-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ── TESTIMONIALS ── */
+.testimonials-section {
+  border-bottom: 4px solid var(--ink);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.quote-block {
+  padding: 56px 48px;
+  border-right: 3px solid var(--ink);
+  position: relative;
+}
+
+.quote-block:last-child { border-right: none; }
+
+.quote-block::before {
+  content: attr(data-index);
+  font-family: 'DM Serif Display', serif;
+  font-size: 160px;
+  color: var(--ink);
+  opacity: 0.05;
+  position: absolute;
+  top: 16px;
+  left: 32px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.quote-block blockquote {
+  font-family: 'DM Serif Text', serif;
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.75;
+  color: var(--ink);
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-block cite {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-style: normal;
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  background: var(--ink);
+  padding: 56px 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+  align-items: center;
+}
+
+.footer-brand {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 400;
+  color: var(--paper);
+  line-height: 0.95;
+}
+
+.footer-brand em { color: var(--gold); font-style: italic; }
+
+.footer-brand .sub {
+  font-family: 'Syne Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0.4;
+  margin-top: 14px;
+  display: block;
+  font-style: normal;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.footer-social a {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: color 0.2s;
+}
+
+.footer-social a:hover { color: var(--gold); }
+
+.social-sq {
+  width: 32px;
+  height: 32px;
+  border: 2px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.footer-email {
+  font-family: 'Syne Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+
+.footer-copy {
+  font-family: 'Syne Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--paper);
+  opacity: 0.3;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .masthead-main { grid-template-columns: 1fr; text-align: center; }
+  .masthead-center { border: none; padding: 24px 0; }
+  .masthead-left, .masthead-right { display: none; }
+  .about-section, .testimonials-section { grid-template-columns: 1fr; }
+  .about-callout { border-top: 3px solid var(--ink); }
+  .quote-block { border-right: none; border-bottom: 3px solid var(--ink); }
+  .quote-block:last-child { border-bottom: none; }
+  .career-grid { grid-template-columns: 1fr 1fr; }
+  .career-card:nth-child(3n) { border-right: 3px solid var(--ink); }
+  .career-card:nth-child(2n) { border-right: none; }
+  .stats-bar { grid-template-columns: 1fr; }
+  .stat-cell { border-right: none; border-bottom: 3px solid var(--ink); }
+  .stat-cell:last-child { border-bottom: none; }
+  .site-footer { grid-template-columns: 1fr; }
+  .footer-right { align-items: flex-start; }
+  .footer-copy { text-align: left; }
+  .hero-strip { flex-direction: column; align-items: flex-start; }
+  .careers-header { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .masthead-top, .hero-strip, .stat-cell, .about-body,
+  .about-callout, .careers-header, .career-card,
+  .quote-block, .site-footer { padding-left: 20px; padding-right: 20px; }
+  .career-grid { grid-template-columns: 1fr; }
+  .career-card { border-right: none !important; }
+  .career-card:last-child { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-top">
+    <span>Gamma Iota Chapter · University of Nebraska–Lincoln</span>
+    <span>Est. 1966</span>
+  </div>
+  <div class="masthead-main">
+    <div class="masthead-left">
+      <div class="edition">Official Chapter Brochure</div>
+      <p>Insurance · Risk Management · Actuarial Science</p>
+    </div>
+    <div class="masthead-center">
+      <h1>GAMMA<br><em>IOTA</em><br>SIGMA</h1>
+      <span class="greek">Γ · Ι · Σ</span>
+    </div>
+    <div class="masthead-right">
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#careers">Careers</a>
+        <a href="#voices">Voices</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO STRIP -->
+<div class="hero-strip">
+  <div class="tagline">Preparing the Next<br>Generation of Insurance.</div>
+  <div class="cta-group">
+    <a href="#careers" class="btn btn-dark">Explore Careers</a>
+    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-cell">
+    <div class="num">19<span>66</span></div>
+    <div class="lbl">Founded at Ohio State</div>
+  </div>
+  <div class="stat-cell">
+    <div class="num">120<span>+</span></div>
+    <div class="lbl">Collegiate Chapters</div>
+  </div>
+  <div class="stat-cell">
+    <div class="num">6,100<span>+</span></div>
+    <div class="lbl">Students Nationwide</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="about-body">
+    <div class="section-label">Who We Are</div>
+    <h2>Insuring <em>Opportunity</em></h2>
+    <p>Gamma Iota Sigma (ΓΙΣ) is a college academic fraternity, founded on April 16, 1966 at The Ohio State University in Columbus, Ohio.</p>
+    <p>We are organized to promote, encourage, and sustain student interest in insurance, risk management, and actuarial science as professions. We aim to encourage high moral and scholastic attainments and to facilitate the interaction and cooperation of educational institutions, industry, and professional organizations by fostering research, scholarship, and improved public relations.</p>
+  </div>
+  <div class="about-callout">
+    <p>"Gamma Iota Sigma is recognized as the insurance industry's premier collegiate talent pipeline."</p>
+    <span class="attr">— GIS National</span>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section id="careers" class="careers-section">
+  <div class="careers-header">
+    <div>
+      <div class="section-label">Career Paths</div>
+      <h2>Where a Career<br>in Insurance<br><em>Takes You</em></h2>
+    </div>
+    <p>The insurance and risk management industry offers a diverse range of career paths — from analytics-heavy actuarial roles to client-facing sales positions — all with strong compensation and growth potential.</p>
+  </div>
+
+  <div class="career-grid">
+    <div class="career-card">
+      <div class="career-cat">Actuarial / Accounting</div>
+      <div class="career-title">Actuarial</div>
+      <div class="career-salary">Median: $125,770</div>
+      <p class="career-desc">Actuaries predict risk using analytical and financial accounting skills, weighing variables like age and statistical data. Strong math background essential.</p>
+    </div>
+    <div class="career-card">
+      <div class="career-cat">Actuarial / Accounting</div>
+      <div class="career-title">Internal Auditing</div>
+      <div class="career-salary">Median: $95,000</div>
+      <p class="career-desc">Auditors monitor and streamline operations across all areas of business, developing strategies and controls to maximize productivity and meet company objectives.</p>
+    </div>
+    <div class="career-card">
+      <div class="career-cat">Actuarial / Accounting</div>
+      <div class="career-title">Controller</div>
+      <div class="career-salary">Median: $110,000</div>
+      <p class="career-desc">The top accounting management role — guides financial decisions for executives and the board, monitors overall financial health of the company.</p>
+    </div>
+    <div class="career-card">
+      <div class="career-cat">All Business</div>
+      <div class="career-title">Claims</div>
+      <div class="career-salary">Median: $73,400</div>
+      <p class="career-desc">Claims professionals fulfill the insurance promise. Roles range from office-based analysts to field-based adjusters who examine losses on site.</p>
+    </div>
+    <div class="career-card">
+      <div class="career-cat">All Business</div>
+      <div class="career-title">Risk Management</div>
+      <div class="career-salary">Median: $90,000</div>
+      <p class="career-desc">Risk managers prevent losses before they occur — a broad field closely linked to insurance, typically requiring five or more years of related experience.</p>
+    </div>
+    <div class="career-card">
+      <div class="career-cat">All Business</div>
+      <div class="career-title">Underwriting</div>
+      <div class="career-salary">Median: $77,860</div>
+      <p class="career-desc">Underwriters create insurance policies using complex algorithms and risk techniques — foundational to every corner of the industry.</p>
+    </div>
+    <div class="career-card">
+      <div class="career-cat">Marketing / Sales</div>
+      <div class="career-title">Sales — Agents &amp; Brokers</div>
+      <div class="career-salary">Median: $60,370</div>
+      <p class="career-desc">Two main types: agents sell on behalf of specific companies; brokers connect buyers with carriers across the market. Both spend most of their time networking and closing deals with flexible, client-facing schedules.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="voices" class="testimonials-section">
+  <div class="quote-block" data-index="❝">
+    <blockquote>"I joined GIS because I knew it was the best opportunity for me to learn about all of the opportunities in insurance, network with those in the field, and ultimately jump start me for a great career. I have made some of my best friends in college and have been able to excel both professionally and academically!"</blockquote>
+    <cite>Daniel Sutherland — President</cite>
+  </div>
+  <div class="quote-block" data-index="❝">
+    <blockquote>"My favorite GIS memory is the annual conference in Hartford, Connecticut. I enjoyed the career fair where I got to network with tons of companies. I also liked learning about new insurance topics like gambling risk!"</blockquote>
+    <cite>Dylan Asmus — Travel Chair</cite>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact" class="site-footer">
+  <div class="footer-brand">
+    GAMMA<br><em>IOTA</em><br>SIGMA
+    <span class="sub">Gamma Iota Chapter · UNL</span>
+  </div>
+  <div class="footer-right">
+    <div class="footer-social">
+      <a href="https://www.instagram.com/unlgis/" target="_blank">
+        <span class="social-sq">ig</span>
+        @unlgis
+      </a>
+      <a href="https://www.linkedin.com/company/unl-gamma-iota-sigma" target="_blank">
+        <span class="social-sq">in</span>
+        UNL Gamma Iota Sigma
+      </a>
+    </div>
+    <div class="footer-email">unlgammaiotasigma@gmail.com</div>
+    <div class="footer-copy">© Gamma Iota Sigma · Gamma Iota Chapter</div>
+  </div>
+</footer>
+
+</body>
+</html>
 <title>Gamma Iota Sigma — Gamma Iota Chapter</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
