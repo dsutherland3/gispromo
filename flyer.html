@@ -1,712 +1,991 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gamma Iota Sigma</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Serif+Text:ital@0;1&family=Syne:wght@400;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<title>Gamma Iota Sigma — Gamma Iota Chapter</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* ═══════════════════════════════
+   THEME TOKENS
+═══════════════════════════════ */
 :root {
-  --ink: #0A0A0A;
-  --paper: #F4F0E6;
-  --gold: #D4A800;
-  --gold-dark: #A07F00;
-  --rule: #0A0A0A;
-  --muted: #5A5550;
+  --gold:       #C9970C;
+  --gold-light: #E8B824;
+  --gold-dim:   #8A6508;
+  --gold-glow:  rgba(201,151,12,0.15);
+  --transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
 }
 
+[data-theme="light"] {
+  --bg:         #FAFAF7;
+  --bg-card:    #FFFFFF;
+  --bg-alt:     #F2F0EA;
+  --bg-invert:  #12120F;
+  --text:       #12120F;
+  --text-2:     #4A4840;
+  --text-3:     #8A8880;
+  --text-invert:#FAFAF7;
+  --border:     rgba(18,18,15,0.12);
+  --border-strong: rgba(18,18,15,0.25);
+  --shadow:     0 2px 24px rgba(0,0,0,0.06);
+  --shadow-lg:  0 8px 48px rgba(0,0,0,0.10);
+}
+
+[data-theme="dark"] {
+  --bg:         #0E0E0C;
+  --bg-card:    #181815;
+  --bg-alt:     #141412;
+  --bg-invert:  #F5F0E8;
+  --text:       #F0EDE4;
+  --text-2:     #B8B4A8;
+  --text-3:     #706C60;
+  --text-invert:#12120F;
+  --border:     rgba(240,237,228,0.10);
+  --border-strong: rgba(240,237,228,0.22);
+  --shadow:     0 2px 24px rgba(0,0,0,0.40);
+  --shadow-lg:  0 8px 48px rgba(0,0,0,0.60);
+}
+
+/* ═══════════════════════════════
+   RESET & BASE
+═══════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: 'DM Serif Text', serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  transition: var(--transition);
   overflow-x: hidden;
 }
 
-/* ── MASTHEAD ── */
-.masthead {
-  border-bottom: 6px solid var(--ink);
-}
-
-.masthead-top {
-  background: var(--ink);
-  padding: 10px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.masthead-top span {
-  font-family: 'Syne Mono', monospace;
-  font-size: 11px;
-  color: var(--paper);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  opacity: 0.7;
-}
-
-.masthead-main {
-  padding: 32px 40px 0;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: end;
-  border-bottom: 3px solid var(--ink);
-}
-
-.masthead-left {
-  padding-bottom: 24px;
-}
-
-.masthead-left .edition {
-  font-family: 'Syne', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
-
-.masthead-left p {
-  font-family: 'DM Serif Text', serif;
-  font-size: 15px;
-  line-height: 1.6;
-  max-width: 280px;
-  color: var(--muted);
-}
-
-.masthead-center {
-  padding: 0 48px;
-  text-align: center;
-  border-left: 3px solid var(--ink);
-  border-right: 3px solid var(--ink);
-}
-
-.masthead-center h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(52px, 8vw, 108px);
-  font-weight: 400;
-  line-height: 0.88;
-  letter-spacing: -3px;
-  color: var(--ink);
-}
-
-.masthead-center h1 em {
-  font-style: italic;
-  color: var(--gold);
-}
-
-.masthead-center .greek {
-  font-family: 'DM Serif Display', serif;
-  font-size: 22px;
-  letter-spacing: 8px;
-  color: var(--muted);
-  margin-top: 12px;
-  display: block;
-  padding-bottom: 20px;
-}
-
-.masthead-right {
-  padding-bottom: 24px;
-  text-align: right;
-}
-
-.masthead-right .nav-links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-}
-
-.masthead-right a {
-  font-family: 'Syne', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--ink);
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s, color 0.2s;
-  padding-bottom: 2px;
-}
-
-.masthead-right a:hover { border-color: var(--gold); color: var(--gold-dark); }
-
-/* ── HERO STRIP ── */
-.hero-strip {
-  background: var(--gold);
-  padding: 20px 40px;
+/* ═══════════════════════════════
+   DECO ORNAMENT (SVG inline reuse)
+═══════════════════════════════ */
+.deco-line {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  border-bottom: 4px solid var(--ink);
-}
-
-.hero-strip .tagline {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(22px, 3.5vw, 42px);
-  font-style: italic;
-  color: var(--ink);
-  line-height: 1.1;
-}
-
-.hero-strip .cta-group {
-  display: flex;
   gap: 12px;
-  flex-shrink: 0;
-}
-
-.btn {
-  font-family: 'Syne', sans-serif;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  padding: 12px 24px;
-  text-decoration: none;
-  border: 3px solid var(--ink);
-  transition: all 0.2s;
-  cursor: pointer;
-  display: inline-block;
-}
-
-.btn-dark { background: var(--ink); color: var(--paper); }
-.btn-dark:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
-.btn-ghost { background: transparent; color: var(--ink); }
-.btn-ghost:hover { background: var(--ink); color: var(--paper); }
-
-/* ── STATS BAR ── */
-.stats-bar {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-bottom: 4px solid var(--ink);
-}
-
-.stat-cell {
-  padding: 32px 40px;
-  border-right: 3px solid var(--ink);
-}
-.stat-cell:last-child { border-right: none; }
-
-.stat-cell .num {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(48px, 6vw, 80px);
-  font-weight: 400;
-  line-height: 1;
-  color: var(--ink);
-}
-
-.stat-cell .num span { color: var(--gold); }
-
-.stat-cell .lbl {
-  font-family: 'Syne', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 8px;
-}
-
-/* ── ABOUT ── */
-.about-section {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  border-bottom: 4px solid var(--ink);
-}
-
-.about-body {
-  padding: 56px 40px;
-  border-right: 3px solid var(--ink);
-}
-
-.section-label {
-  font-family: 'Syne Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--muted);
   margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
 }
-
-.section-label::after {
+.deco-line::before,
+.deco-line::after {
   content: '';
   flex: 1;
   height: 1px;
-  background: var(--muted);
-  opacity: 0.4;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.deco-line span {
+  color: var(--gold);
+  font-size: 16px;
+  line-height: 1;
 }
 
-.about-body h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(32px, 4vw, 56px);
+.deco-corner {
+  width: 32px;
+  height: 32px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  position: absolute;
+}
+.deco-corner.tr { top:0; right:0; transform: rotate(90deg); }
+.deco-corner.bl { bottom:0; left:0; transform: rotate(180deg); }
+.deco-corner.br { bottom:0; right:0; transform: rotate(270deg); }
+
+/* ═══════════════════════════════
+   THEME TOGGLE
+═══════════════════════════════ */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 100;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  padding: 8px 16px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+.theme-toggle:hover {
+  background: var(--gold);
+  color: var(--text-invert);
+  border-color: var(--gold);
+}
+
+/* ═══════════════════════════════
+   NAV
+═══════════════════════════════ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 56px;
+  transition: var(--transition);
+}
+
+.nav-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color 0.2s;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+.nav-links a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ═══════════════════════════════
+   HERO
+═══════════════════════════════ */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, var(--gold-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Large deco diamond */
+.hero-diamond {
+  width: 180px;
+  height: 180px;
+  border: 1.5px solid var(--gold);
+  transform: rotate(45deg);
+  position: relative;
+  margin-bottom: 48px;
+  flex-shrink: 0;
+  transition: border-color 0.35s;
+}
+.hero-diamond::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid var(--border);
+  transition: border-color 0.35s;
+}
+.hero-diamond-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-45deg);
+}
+.hero-diamond-inner span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 6px;
+  color: var(--gold);
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(56px, 10vw, 128px);
+  font-weight: 300;
+  line-height: 0.88;
+  letter-spacing: 8px;
+  color: var(--text);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.hero h1 em {
+  font-style: italic;
   font-weight: 400;
-  line-height: 1.05;
-  margin-bottom: 28px;
+  color: var(--gold);
 }
 
-.about-body h2 em { font-style: italic; color: var(--gold-dark); }
+.hero-rule {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 28px auto;
+}
 
-.about-body p {
-  font-size: 17px;
-  line-height: 1.85;
-  color: #3A3530;
-  margin-bottom: 18px;
-  max-width: 600px;
+.hero-tagline {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-2);
+  max-width: 480px;
+  line-height: 2;
+}
+
+.hero-cta {
+  margin-top: 48px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════
+   BUTTONS
+═══════════════════════════════ */
+.btn {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.25s ease;
+  border: 1px solid;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--text-invert);
+  border-color: var(--gold);
+}
+.btn-gold:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(201,151,12,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════
+   SECTION CHROME
+═══════════════════════════════ */
+.section-wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 96px 40px;
+}
+
+.section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: 2px;
+  color: var(--text);
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+
+/* ═══════════════════════════════
+   STATS STRIP
+═══════════════════════════════ */
+.stats-strip {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.stats-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.stat-block {
+  padding: 48px 40px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.stat-block:last-child { border-right: none; }
+
+.stat-block::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity 0.3s, width 0.3s;
+}
+.stat-block:hover::before { opacity: 1; width: 80px; }
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 6vw, 80px);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text);
+  letter-spacing: -1px;
+}
+.stat-num sup {
+  font-size: 0.45em;
+  color: var(--gold);
+  vertical-align: super;
+  font-weight: 600;
+}
+
+.stat-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-top: 10px;
+}
+
+/* ═══════════════════════════════
+   ABOUT
+═══════════════════════════════ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-text p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text-2);
+  margin-bottom: 20px;
 }
 
 .about-callout {
-  padding: 56px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: var(--ink);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 48px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
 }
 
-.about-callout p {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(18px, 2.5vw, 28px);
+.about-callout blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 2.5vw, 28px);
   font-style: italic;
-  line-height: 1.4;
-  color: var(--gold);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text);
   margin-bottom: 24px;
 }
 
-.about-callout .attr {
-  font-family: 'Syne Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 3px;
+.about-callout blockquote::before {
+  content: '"';
+  font-size: 80px;
+  line-height: 0.5;
+  color: var(--gold);
+  opacity: 0.3;
+  display: block;
+  margin-bottom: 20px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.about-callout cite {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--paper);
-  opacity: 0.5;
+  color: var(--gold);
+  font-style: normal;
 }
 
-/* ── CAREERS ── */
-.careers-section { border-bottom: 4px solid var(--ink); }
+/* ═══════════════════════════════
+   CAREERS
+═══════════════════════════════ */
+.careers-bg {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
 
-.careers-header {
-  padding: 40px 40px 32px;
-  border-bottom: 3px solid var(--ink);
+.careers-intro {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 40px;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
   align-items: end;
+  margin-bottom: 64px;
 }
 
-.careers-header h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(40px, 6vw, 80px);
-  font-weight: 400;
-  line-height: 0.95;
-}
-
-.careers-header h2 em { font-style: italic; color: var(--gold-dark); }
-
-.careers-header p {
-  font-size: 16px;
-  line-height: 1.75;
-  color: var(--muted);
-  max-width: 480px;
+.careers-intro p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-2);
   align-self: end;
 }
 
 .career-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 1fr;
+  gap: 1px;
+  background: var(--border);
 }
 
 .career-card {
+  background: var(--bg-card);
   padding: 36px 32px;
-  border-right: 3px solid var(--ink);
-  border-bottom: 3px solid var(--ink);
-  transition: background 0.2s;
   display: flex;
   flex-direction: column;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.career-card:nth-child(3n) { border-right: none; }
-.career-card:nth-last-child(-n+1) { border-bottom: none; }
-.career-card:nth-last-child(-n+2) { border-bottom: none; }
-.career-card:nth-last-child(-n+3) { border-bottom: none; }
+.career-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.35s ease;
+}
 
-.career-card:hover { background: var(--gold); }
-.career-card:hover .career-salary { background: var(--ink); color: var(--gold); }
-
-.career-num { display: none; }
+.career-card:hover { background: var(--bg); }
+.career-card:hover::after { width: 100%; }
+.career-card:hover .career-salary-tag { background: var(--gold); color: var(--text-invert); }
 
 .career-cat {
-  font-family: 'Syne Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 3px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 8px;
+  color: var(--gold-dim);
+  margin-bottom: 12px;
 }
 
 .career-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 26px;
   font-weight: 400;
-  margin-bottom: 10px;
+  letter-spacing: 1px;
+  color: var(--text);
+  margin-bottom: 14px;
   line-height: 1.1;
 }
 
-.career-salary {
+.career-salary-tag {
   display: inline-block;
-  background: var(--gold);
-  color: var(--ink);
-  font-family: 'Syne', sans-serif;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  padding: 4px 10px;
-  margin-bottom: 16px;
-  transition: all 0.2s;
+  border: 1px solid var(--border-strong);
+  color: var(--text-2);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  margin-bottom: 18px;
+  transition: all 0.25s;
+  width: fit-content;
 }
 
 .career-desc {
   font-size: 13px;
-  line-height: 1.7;
-  color: var(--muted);
+  line-height: 1.75;
+  color: var(--text-2);
+  flex: 1;
 }
 
-/* ── TESTIMONIALS ── */
-.testimonials-section {
-  border-bottom: 4px solid var(--ink);
+/* ═══════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════ */
+.quotes-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 56px;
 }
 
-.quote-block {
-  padding: 56px 48px;
-  border-right: 3px solid var(--ink);
+.quote-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 48px 44px;
   position: relative;
+  transition: var(--transition), box-shadow 0.3s;
 }
 
-.quote-block:last-child { border-right: none; }
-
-.quote-block::before {
-  content: attr(data-index);
-  font-family: 'DM Serif Display', serif;
-  font-size: 160px;
-  color: var(--ink);
-  opacity: 0.05;
-  position: absolute;
-  top: 16px;
-  left: 32px;
-  line-height: 1;
-  pointer-events: none;
+.quote-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gold);
 }
 
-.quote-block blockquote {
-  font-family: 'DM Serif Text', serif;
+/* deco corner set */
+.quote-card .deco-corner      { top:0; left:0; }
+.quote-card .deco-corner.tr   { top:0; right:0; }
+.quote-card .deco-corner.bl   { bottom:0; left:0; }
+.quote-card .deco-corner.br   { bottom:0; right:0; }
+
+.quote-card blockquote {
+  font-family: 'Cormorant Garamond', serif;
   font-size: 19px;
   font-style: italic;
-  line-height: 1.75;
-  color: var(--ink);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text);
   margin-bottom: 28px;
-  position: relative;
-  z-index: 1;
 }
 
-.quote-block cite {
-  font-family: 'Syne', sans-serif;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 3px;
+.quote-card cite {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--gold-dark);
+  color: var(--gold);
   font-style: normal;
 }
 
-/* ── FOOTER ── */
-.site-footer {
-  background: var(--ink);
-  padding: 56px 40px;
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+footer {
+  background: var(--bg-invert);
+  transition: background 0.35s ease;
+}
+
+.footer-top {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 80px 40px 60px;
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 60px;
+  gap: 80px;
   align-items: center;
 }
 
 .footer-brand {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(28px, 4vw, 52px);
-  font-weight: 400;
-  color: var(--paper);
-  line-height: 0.95;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 300;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--text-invert);
+  line-height: 1;
 }
-
 .footer-brand em { color: var(--gold); font-style: italic; }
 
-.footer-brand .sub {
-  font-family: 'Syne Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 3px;
+.footer-sub {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--paper);
-  opacity: 0.4;
+  color: var(--gold-dim);
   margin-top: 14px;
   display: block;
-  font-style: normal;
 }
 
-.footer-right {
+.footer-links {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 20px;
+  gap: 16px;
 }
 
-.footer-social {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-end;
-}
-
-.footer-social a {
-  font-family: 'Syne', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--paper);
-  text-decoration: none;
+.footer-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  text-decoration: none;
   transition: color 0.2s;
 }
 
-.footer-social a:hover { color: var(--gold); }
+.footer-link-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-invert);
+  opacity: 0.6;
+  transition: opacity 0.2s, color 0.2s;
+}
+.footer-link:hover .footer-link-label { opacity: 1; color: var(--gold-light); }
 
-.social-sq {
-  width: 32px;
-  height: 32px;
-  border: 2px solid currentColor;
+.footer-icon {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
-  font-weight: 800;
-  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-invert);
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+.footer-link:hover .footer-icon {
+  border-color: var(--gold);
+  color: var(--gold);
+  opacity: 1;
 }
 
 .footer-email {
-  font-family: 'Syne Mono', monospace;
-  font-size: 13px;
-  letter-spacing: 1px;
-  color: var(--gold);
-}
-
-.footer-copy {
-  font-family: 'Syne Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--paper);
-  opacity: 0.3;
-  text-transform: uppercase;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--gold-light);
+  margin-top: 8px;
   text-align: right;
 }
 
-/* ── RESPONSIVE ── */
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-bottom p {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-invert);
+  opacity: 0.3;
+}
+
+/* ═══════════════════════════════
+   DIVIDER
+═══════════════════════════════ */
+.gold-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 40px;
+  opacity: 0.4;
+}
+.gold-rule::before,
+.gold-rule::after {
+  content: '';
+  flex: 1;
+  max-width: 200px;
+  height: 1px;
+  background: var(--gold);
+}
+.gold-rule-diamond {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
 @media (max-width: 900px) {
-  .masthead-main { grid-template-columns: 1fr; text-align: center; }
-  .masthead-center { border: none; padding: 24px 0; }
-  .masthead-left, .masthead-right { display: none; }
-  .about-section, .testimonials-section { grid-template-columns: 1fr; }
-  .about-callout { border-top: 3px solid var(--ink); }
-  .quote-block { border-right: none; border-bottom: 3px solid var(--ink); }
-  .quote-block:last-child { border-bottom: none; }
+  .about-grid, .careers-intro, .quotes-grid, .footer-top {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
   .career-grid { grid-template-columns: 1fr 1fr; }
-  .career-card:nth-child(3n) { border-right: 3px solid var(--ink); }
-  .career-card:nth-child(2n) { border-right: none; }
-  .stats-bar { grid-template-columns: 1fr; }
-  .stat-cell { border-right: none; border-bottom: 3px solid var(--ink); }
-  .stat-cell:last-child { border-bottom: none; }
-  .site-footer { grid-template-columns: 1fr; }
-  .footer-right { align-items: flex-start; }
-  .footer-copy { text-align: left; }
-  .hero-strip { flex-direction: column; align-items: flex-start; }
-  .careers-header { grid-template-columns: 1fr; }
+  nav { padding: 0 20px; }
+  .nav-links { gap: 20px; }
+  .stats-inner { grid-template-columns: 1fr; }
+  .stat-block { border-right: none; border-bottom: 1px solid var(--border); }
+  .stat-block:last-child { border-bottom: none; }
+  .footer-links { align-items: flex-start; }
+  .footer-email { text-align: left; }
 }
 
 @media (max-width: 600px) {
-  .masthead-top, .hero-strip, .stat-cell, .about-body,
-  .about-callout, .careers-header, .career-card,
-  .quote-block, .site-footer { padding-left: 20px; padding-right: 20px; }
   .career-grid { grid-template-columns: 1fr; }
-  .career-card { border-right: none !important; }
-  .career-card:last-child { grid-column: span 1; }
+  .section-wrap { padding: 64px 20px; }
+  nav { display: none; }
+  .theme-toggle { top: 12px; right: 12px; }
+  .hero { padding: 80px 20px 60px; }
 }
 </style>
 </head>
 <body>
 
-<!-- MASTHEAD -->
-<header class="masthead">
-  <div class="masthead-top">
-    <span>Gamma Iota Chapter · University of Nebraska–Lincoln</span>
-    <span>Est. 1966</span>
-  </div>
-  <div class="masthead-main">
-    <div class="masthead-left">
-      <div class="edition">Official Chapter Brochure</div>
-      <p>Insurance · Risk Management · Actuarial Science</p>
-    </div>
-    <div class="masthead-center">
-      <h1>GAMMA<br><em>IOTA</em><br>SIGMA</h1>
-      <span class="greek">Γ · Ι · Σ</span>
-    </div>
-    <div class="masthead-right">
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#careers">Careers</a>
-        <a href="#voices">Voices</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
-  </div>
-</header>
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">☀ Light</button>
 
-<!-- HERO STRIP -->
-<div class="hero-strip">
-  <div class="tagline">Preparing the Next<br>Generation of Insurance.</div>
-  <div class="cta-group">
-    <a href="#careers" class="btn btn-dark">Explore Careers</a>
-    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
-  </div>
-</div>
+<!-- NAV -->
+<nav aria-label="Main navigation">
+  <div class="nav-mark">ΓΙΣ</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#careers">Careers</a></li>
+    <li><a href="#voices">Voices</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stat-cell">
-    <div class="num">19<span>66</span></div>
-    <div class="lbl">Founded at Ohio State</div>
+<!-- HERO -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-diamond" aria-hidden="true">
+    <div class="hero-diamond-inner"><span>ΓΙΣ</span></div>
   </div>
-  <div class="stat-cell">
-    <div class="num">120<span>+</span></div>
-    <div class="lbl">Collegiate Chapters</div>
+
+  <p class="hero-eyebrow">Gamma Iota Chapter · University of Nebraska–Lincoln</p>
+
+  <h1>GAMMA<br><em>IOTA</em><br>SIGMA</h1>
+
+  <div class="hero-rule" aria-hidden="true"></div>
+
+  <p class="hero-tagline">Preparing the Next Generation<br>of Insurance Professionals</p>
+
+  <div class="hero-cta">
+    <a href="#careers" class="btn btn-gold">Explore Careers</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
   </div>
-  <div class="stat-cell">
-    <div class="num">6,100<span>+</span></div>
-    <div class="lbl">Students Nationwide</div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip" aria-label="Chapter statistics">
+  <div class="stats-inner">
+    <div class="stat-block">
+      <div class="stat-num">1966</div>
+      <div class="stat-label">Founded at Ohio State</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">120<sup>+</sup></div>
+      <div class="stat-label">Collegiate Chapters</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">6,100<sup>+</sup></div>
+      <div class="stat-label">Students Nationwide</div>
+    </div>
   </div>
 </div>
 
 <!-- ABOUT -->
-<section id="about" class="about-section">
-  <div class="about-body">
-    <div class="section-label">Who We Are</div>
-    <h2>Insuring <em>Opportunity</em></h2>
-    <p>Gamma Iota Sigma (ΓΙΣ) is a college academic fraternity, founded on April 16, 1966 at The Ohio State University in Columbus, Ohio.</p>
-    <p>We are organized to promote, encourage, and sustain student interest in insurance, risk management, and actuarial science as professions. We aim to encourage high moral and scholastic attainments and to facilitate the interaction and cooperation of educational institutions, industry, and professional organizations by fostering research, scholarship, and improved public relations.</p>
-  </div>
-  <div class="about-callout">
-    <p>"Gamma Iota Sigma is recognized as the insurance industry's premier collegiate talent pipeline."</p>
-    <span class="attr">— GIS National</span>
+<section id="about" aria-labelledby="about-heading">
+  <div class="section-wrap">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="section-label">Who We Are</span>
+        <h2 class="section-title" id="about-heading">Insuring<br><em>Opportunity</em></h2>
+        <div class="deco-line" aria-hidden="true"><span>◆</span></div>
+        <p>Gamma Iota Sigma (ΓΙΣ) is a college academic fraternity, founded on April 16, 1966 at The Ohio State University in Columbus, Ohio.</p>
+        <p>We are organized to promote, encourage, and sustain student interest in insurance, risk management, and actuarial science as professions. We aim to encourage high moral and scholastic attainments and to facilitate the interaction and cooperation of educational institutions, industry, and professional organizations by fostering research, scholarship, and improved public relations.</p>
+      </div>
+      <div class="about-callout" role="complementary" aria-label="Key fact">
+        <div class="deco-corner" aria-hidden="true"></div>
+        <div class="deco-corner tr" aria-hidden="true"></div>
+        <div class="deco-corner bl" aria-hidden="true"></div>
+        <div class="deco-corner br" aria-hidden="true"></div>
+        <blockquote>Gamma Iota Sigma is recognized as the insurance industry's premier collegiate talent pipeline.</blockquote>
+        <cite>GIS National</cite>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- CAREERS -->
-<section id="careers" class="careers-section">
-  <div class="careers-header">
-    <div>
-      <div class="section-label">Career Paths</div>
-      <h2>Where a Career<br>in Insurance<br><em>Takes You</em></h2>
+<section id="careers" class="careers-bg" aria-labelledby="careers-heading">
+  <div class="section-wrap">
+    <div class="careers-intro">
+      <div>
+        <span class="section-label">Career Paths</span>
+        <h2 class="section-title" id="careers-heading">Where a Career<br>in Insurance<br><em>Takes You</em></h2>
+      </div>
+      <p>The insurance and risk management industry offers a diverse range of career paths — from analytics-heavy actuarial roles to client-facing sales positions — all with strong compensation and growth potential.</p>
     </div>
-    <p>The insurance and risk management industry offers a diverse range of career paths — from analytics-heavy actuarial roles to client-facing sales positions — all with strong compensation and growth potential.</p>
-  </div>
 
-  <div class="career-grid">
-    <div class="career-card">
-      <div class="career-cat">Actuarial / Accounting</div>
-      <div class="career-title">Actuarial</div>
-      <div class="career-salary">Median: $125,770</div>
-      <p class="career-desc">Actuaries predict risk using analytical and financial accounting skills, weighing variables like age and statistical data. Strong math background essential.</p>
-    </div>
-    <div class="career-card">
-      <div class="career-cat">Actuarial / Accounting</div>
-      <div class="career-title">Internal Auditing</div>
-      <div class="career-salary">Median: $95,000</div>
-      <p class="career-desc">Auditors monitor and streamline operations across all areas of business, developing strategies and controls to maximize productivity and meet company objectives.</p>
-    </div>
-    <div class="career-card">
-      <div class="career-cat">Actuarial / Accounting</div>
-      <div class="career-title">Controller</div>
-      <div class="career-salary">Median: $110,000</div>
-      <p class="career-desc">The top accounting management role — guides financial decisions for executives and the board, monitors overall financial health of the company.</p>
-    </div>
-    <div class="career-card">
-      <div class="career-cat">All Business</div>
-      <div class="career-title">Claims</div>
-      <div class="career-salary">Median: $73,400</div>
-      <p class="career-desc">Claims professionals fulfill the insurance promise. Roles range from office-based analysts to field-based adjusters who examine losses on site.</p>
-    </div>
-    <div class="career-card">
-      <div class="career-cat">All Business</div>
-      <div class="career-title">Risk Management</div>
-      <div class="career-salary">Median: $90,000</div>
-      <p class="career-desc">Risk managers prevent losses before they occur — a broad field closely linked to insurance, typically requiring five or more years of related experience.</p>
-    </div>
-    <div class="career-card">
-      <div class="career-cat">All Business</div>
-      <div class="career-title">Underwriting</div>
-      <div class="career-salary">Median: $77,860</div>
-      <p class="career-desc">Underwriters create insurance policies using complex algorithms and risk techniques — foundational to every corner of the industry.</p>
-    </div>
-    <div class="career-card">
-      <div class="career-cat">Marketing / Sales</div>
-      <div class="career-title">Sales — Agents &amp; Brokers</div>
-      <div class="career-salary">Median: $60,370</div>
-      <p class="career-desc">Two main types: agents sell on behalf of specific companies; brokers connect buyers with carriers across the market. Both spend most of their time networking and closing deals with flexible, client-facing schedules.</p>
+    <div class="career-grid" role="list">
+      <div class="career-card" role="listitem">
+        <div class="career-cat">Actuarial / Accounting</div>
+        <div class="career-title">Actuarial</div>
+        <div class="career-salary-tag">Median $125,770</div>
+        <p class="career-desc">Actuaries predict risk using analytical and financial accounting skills, weighing variables like age and statistical data. Strong math background essential.</p>
+      </div>
+      <div class="career-card" role="listitem">
+        <div class="career-cat">Actuarial / Accounting</div>
+        <div class="career-title">Internal Auditing</div>
+        <div class="career-salary-tag">Median $95,000</div>
+        <p class="career-desc">Auditors monitor and streamline operations across all areas of business, developing strategies and controls to maximize productivity and meet objectives.</p>
+      </div>
+      <div class="career-card" role="listitem">
+        <div class="career-cat">Actuarial / Accounting</div>
+        <div class="career-title">Controller</div>
+        <div class="career-salary-tag">Median $110,000</div>
+        <p class="career-desc">The top accounting management role — guides financial decisions for executives and the board, monitors overall financial health of the company.</p>
+      </div>
+      <div class="career-card" role="listitem">
+        <div class="career-cat">All Business</div>
+        <div class="career-title">Claims</div>
+        <div class="career-salary-tag">Median $73,400</div>
+        <p class="career-desc">Claims professionals fulfill the insurance promise. Roles range from office-based analysts to field-based adjusters who examine losses on site.</p>
+      </div>
+      <div class="career-card" role="listitem">
+        <div class="career-cat">All Business</div>
+        <div class="career-title">Risk Management</div>
+        <div class="career-salary-tag">Median $90,000</div>
+        <p class="career-desc">Risk managers prevent losses before they occur — a broad field closely linked to insurance, typically requiring five or more years of related experience.</p>
+      </div>
+      <div class="career-card" role="listitem">
+        <div class="career-cat">All Business</div>
+        <div class="career-title">Underwriting</div>
+        <div class="career-salary-tag">Median $77,860</div>
+        <p class="career-desc">Underwriters create insurance policies using complex algorithms and risk techniques — foundational to every corner of the industry.</p>
+      </div>
+      <div class="career-card" role="listitem">
+        <div class="career-cat">Marketing / Sales</div>
+        <div class="career-title">Sales — Agents &amp; Brokers</div>
+        <div class="career-salary-tag">Median $60,370</div>
+        <p class="career-desc">Two types: agents sell on behalf of specific companies; brokers connect buyers with carriers across the market. Both network and close deals with flexible, client-facing schedules.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<section id="voices" class="testimonials-section">
-  <div class="quote-block" data-index="❝">
-    <blockquote>"I joined GIS because I knew it was the best opportunity for me to learn about all of the opportunities in insurance, network with those in the field, and ultimately jump start me for a great career. I have made some of my best friends in college and have been able to excel both professionally and academically!"</blockquote>
-    <cite>Daniel Sutherland — President</cite>
-  </div>
-  <div class="quote-block" data-index="❝">
-    <blockquote>"My favorite GIS memory is the annual conference in Hartford, Connecticut. I enjoyed the career fair where I got to network with tons of companies. I also liked learning about new insurance topics like gambling risk!"</blockquote>
-    <cite>Dylan Asmus — Travel Chair</cite>
+<section id="voices" aria-labelledby="voices-heading">
+  <div class="section-wrap">
+    <span class="section-label">Member Voices</span>
+    <h2 class="section-title" id="voices-heading">Our Members <em>Speak</em></h2>
+
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <div class="deco-corner" aria-hidden="true"></div>
+        <div class="deco-corner tr" aria-hidden="true"></div>
+        <div class="deco-corner bl" aria-hidden="true"></div>
+        <div class="deco-corner br" aria-hidden="true"></div>
+        <blockquote>"I joined GIS because I knew it was the best opportunity for me to learn about all of the opportunities in insurance, network with those in the field, and ultimately jump start me for a great career. I have made some of my best friends in college and have been able to excel both professionally and academically!"</blockquote>
+        <cite>Daniel Sutherland — President</cite>
+      </div>
+      <div class="quote-card">
+        <div class="deco-corner" aria-hidden="true"></div>
+        <div class="deco-corner tr" aria-hidden="true"></div>
+        <div class="deco-corner bl" aria-hidden="true"></div>
+        <div class="deco-corner br" aria-hidden="true"></div>
+        <blockquote>"My favorite GIS memory is the annual conference in Hartford, Connecticut. I enjoyed the career fair where I got to network with tons of companies. I also liked learning about new insurance topics like gambling risk!"</blockquote>
+        <cite>Dylan Asmus — Travel Chair</cite>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer id="contact" class="site-footer">
-  <div class="footer-brand">
-    GAMMA<br><em>IOTA</em><br>SIGMA
-    <span class="sub">Gamma Iota Chapter · UNL</span>
-  </div>
-  <div class="footer-right">
-    <div class="footer-social">
-      <a href="https://www.instagram.com/unlgis/" target="_blank">
-        <span class="social-sq">ig</span>
-        @unlgis
-      </a>
-      <a href="https://www.linkedin.com/company/unl-gamma-iota-sigma" target="_blank">
-        <span class="social-sq">in</span>
-        UNL Gamma Iota Sigma
-      </a>
+<footer id="contact" aria-label="Footer and contact">
+  <div class="footer-top">
+    <div class="footer-brand">
+      GAMMA <em>IOTA</em> SIGMA
+      <span class="footer-sub">Gamma Iota Chapter · University of Nebraska–Lincoln</span>
     </div>
-    <div class="footer-email">unlgammaiotasigma@gmail.com</div>
-    <div class="footer-copy">© Gamma Iota Sigma · Gamma Iota Chapter</div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/unlgis/" target="_blank" rel="noopener" class="footer-link" aria-label="Instagram">
+        <span class="footer-link-label">@unlgis</span>
+        <span class="footer-icon">IG</span>
+      </a>
+      <a href="https://www.linkedin.com/company/unl-gamma-iota-sigma" target="_blank" rel="noopener" class="footer-link" aria-label="LinkedIn">
+        <span class="footer-link-label">UNL Gamma Iota Sigma</span>
+        <span class="footer-icon">IN</span>
+      </a>
+      <div class="footer-email">unlgammaiotasigma@gmail.com</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© Gamma Iota Sigma · Gamma Iota Chapter · University of Nebraska–Lincoln</p>
+    <div class="gold-rule" aria-hidden="true">
+      <div class="gold-rule-diamond"></div>
+    </div>
   </div>
 </footer>
 
+<script>
+  const btn = document.getElementById('themeBtn');
+  const html = document.documentElement;
+
+  // Respect system preference on load
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (prefersDark) {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☾ Dark';
+  }
+
+  btn.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    btn.textContent = isDark ? '☀ Light' : '☾ Dark';
+  });
+</script>
 </body>
 </html>
