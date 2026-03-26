@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gamma Iota Sigma — Gamma Iota Chapter</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F5C100;
+    --gold-light: #FFD740;
+    --gold-dark: #C49A00;
+    --black: #0D0D0D;
+    --dark: #1A1A1A;
+    --mid: #2E2E2E;
+    --text: #F0EDE6;
+    --muted: #A89F8C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 60px 24px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(245,193,0,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+
+  .hero-shield {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s ease forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 9vw, 110px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s ease forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(13px, 2.5vw, 17px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.55s ease forwards;
+  }
+
+  .hero-tagline {
+    margin-top: 48px;
+    font-size: clamp(15px, 2vw, 18px);
+    font-weight: 300;
+    color: var(--text);
+    max-width: 560px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s ease forwards;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.85s ease forwards;
+  }
+
+  .btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--black);
+    font-weight: 700;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+  }
+  .btn-outline:hover { background: rgba(245,193,0,0.08); transform: translateY(-2px); }
+
+  .scroll-line {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.1s ease forwards;
+  }
+  .scroll-line span {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .scroll-line::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: pulse 2s infinite;
+  }
+
+  /* ── ABOUT ── */
+  .section {
+    padding: 100px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 28px;
+  }
+
+  .about-text h2 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .about-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  .highlight-box {
+    background: var(--gold);
+    color: var(--black);
+    padding: 28px 32px;
+    margin-top: 32px;
+  }
+
+  .highlight-box p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    color: var(--black);
+    margin: 0;
+  }
+
+  .stats-col {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 24px;
+  }
+
+  .stat-item {
+    border-left: 3px solid var(--gold);
+    padding-left: 24px;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* ── DIVIDER ── */
+  .gold-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.3;
+  }
+
+  /* ── CAREERS ── */
+  .careers-section {
+    background: var(--dark);
+    padding: 100px 24px;
+  }
+
+  .careers-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .careers-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 72px;
+  }
+
+  .careers-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 700;
+    line-height: 1.05;
+  }
+
+  .careers-header p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .career-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2px;
+  }
+
+  .career-card {
+    background: var(--mid);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .career-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: var(--gold);
+    transition: width 0.4s ease;
+  }
+
+  .career-card:hover::before { width: 100%; }
+  .career-card:hover { background: #333; transform: translateY(-4px); }
+
+  .career-cat {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .career-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .career-salary {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    margin-bottom: 18px;
+  }
+
+  .career-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section {
+    padding: 100px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .quote-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  .quote-card {
+    border: 1px solid rgba(245,193,0,0.2);
+    padding: 48px 40px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .quote-card:hover { border-color: var(--gold); }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    color: var(--gold);
+    line-height: 0.5;
+    opacity: 0.3;
+    position: absolute;
+    top: 32px;
+    left: 32px;
+  }
+
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+    margin-bottom: 28px;
+  }
+
+  .quote-author {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── PARTNERS ── */
+  .partners-section {
+    background: var(--dark);
+    padding: 80px 24px;
+  }
+
+  .partners-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .partners-inner h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 48px;
+  }
+
+  .partner-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 24px;
+  }
+
+  .partner-pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text);
+    padding: 10px 22px;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.25s;
+  }
+
+  .partner-pill:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* ── CONTACT / FOOTER ── */
+  .footer {
+    padding: 100px 24px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .footer-brand h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .footer-brand h2 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .footer-brand p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 380px;
+    margin-bottom: 36px;
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+
+  .social-link:hover { color: var(--gold); }
+
+  .social-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .contact-col h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .contact-item {
+    margin-bottom: 24px;
+  }
+
+  .contact-item .c-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .contact-item a, .contact-item span {
+    font-size: 16px;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-item a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(245,193,0,0.15);
+    padding: 28px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-bottom p {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--muted);
+  }
+
+  .gis-mark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 1; transform: none; }
+  .reveal-delay-1, .reveal-delay-2, .reveal-delay-3, .reveal-delay-4 {}
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .about-grid, .careers-header, .quote-grid, .footer {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .stats-col { flex-direction: row; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Gamma Iota Chapter · University of Nebraska–Lincoln</div>
+
+  <!-- Shield SVG -->
+  <svg class="hero-shield" viewBox="0 0 90 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M45 4L82 18V54C82 72 65 88 45 96C25 88 8 72 8 54V18L45 4Z" fill="#F5C100" stroke="#C49A00" stroke-width="1.5"/>
+    <text x="45" y="62" text-anchor="middle" font-family="serif" font-size="36" font-weight="900" fill="#0D0D0D">ΓΙΣ</text>
+  </svg>
+
+  <h1>GAMMA<br><em>IOTA</em><br>SIGMA</h1>
+  <p class="hero-sub">Preparing the Next Generation of Insurance</p>
+  <p class="hero-tagline">An international professional fraternity promoting student interest in insurance, risk management, and actuarial science.</p>
+
+  <div class="hero-cta">
+    <a href="#careers" class="btn btn-gold">Explore Careers</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+
+
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding: 100px 24px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="label">Who We Are</div>
+        <h2>Insuring <em>Opportunity</em></h2>
+        <p>Gamma Iota Sigma (ΓΙΣ) is a college academic fraternity, founded on April 16, 1966 at The Ohio State University in Columbus, Ohio.</p>
+        <p>We are organized to promote, encourage, and sustain student interest in insurance, risk management, and actuarial science as professions. We aim to encourage high moral and scholastic attainments and to facilitate the interaction and cooperation of educational institutions, industry, and professional organizations by fostering research, scholarship, and improved public relations.</p>
+        <div class="highlight-box">
+          <p>Gamma Iota Sigma is recognized as the insurance industry's premier collegiate talent pipeline.</p>
+        </div>
+      </div>
+
+      <div class="stats-col reveal reveal-delay-2">
+        <div class="stat-item">
+          <div class="stat-num">1966</div>
+          <div class="stat-label">Founded at Ohio State</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">120+</div>
+          <div class="stat-label">Collegiate Chapters</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">6,100+</div>
+          <div class="stat-label">Students Nationwide</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- CAREERS -->
+<section id="careers" class="careers-section">
+  <div class="careers-inner">
+    <div class="careers-header reveal">
+      <div>
+        <div class="label">Career Paths</div>
+        <h2>Where a Career in<br><em>Insurance Takes You</em></h2>
+      </div>
+      <p>The insurance and risk management industry offers a diverse range of career paths — from analytics-heavy actuarial roles to client-facing sales positions — all with strong compensation and growth potential.</p>
+    </div>
+
+    <div class="career-grid">
+
+      <!-- Actuarial / Accounting -->
+      <div class="career-card reveal">
+        <div class="career-cat">Actuarial / Accounting</div>
+        <div class="career-title">Actuarial</div>
+        <div class="career-salary">Median: $125,770</div>
+        <p class="career-desc">Actuaries employ analytical skills and financial accounting knowledge to predict the risk associated with writing insurance policies, weighing factors like age and other variables. Strong math and statistical analysis skills are essential.</p>
+      </div>
+
+      <div class="career-card reveal reveal-delay-1">
+        <div class="career-cat">Actuarial / Accounting</div>
+        <div class="career-title">Internal Auditing</div>
+        <div class="career-salary">Median: $95,000</div>
+        <p class="career-desc">Internal auditors monitor and streamline operations across all areas of business, developing strategies and controls to maximize productivity, attract customers, grow the business, and meet company objectives and goals.</p>
+      </div>
+
+      <div class="career-card reveal reveal-delay-2">
+        <div class="career-cat">Actuarial / Accounting</div>
+        <div class="career-title">Controller</div>
+        <div class="career-salary">Median: $110,000</div>
+        <p class="career-desc">The controller acts as the top management person in the accounting department, guiding financial decisions made by executives and the board of directors while monitoring the overall financial condition of the company.</p>
+      </div>
+
+      <!-- All Business -->
+      <div class="career-card reveal">
+        <div class="career-cat">All Business</div>
+        <div class="career-title">Claims</div>
+        <div class="career-salary">Median: $73,400</div>
+        <p class="career-desc">Claims professionals fulfill the insurance promise — when something bad happens, they ensure customers are compensated. Roles range from office-based claims clerks and analysts to field-based claims adjusters who examine losses on site.</p>
+      </div>
+
+      <div class="career-card reveal reveal-delay-1">
+        <div class="career-cat">All Business</div>
+        <div class="career-title">Risk Management</div>
+        <div class="career-salary">Median: $90,000</div>
+        <p class="career-desc">Risk managers analyze and implement ways to prevent losses before they occur. It's a broad field closely linked to insurance, and typically requires five or more years of experience in related fields like insurance or loss control consulting.</p>
+      </div>
+
+      <div class="career-card reveal reveal-delay-2">
+        <div class="career-cat">All Business</div>
+        <div class="career-title">Underwriting</div>
+        <div class="career-salary">Median: $77,860</div>
+        <p class="career-desc">Underwriters create insurance policies — they decide what should be covered and how much to charge. Using complex algorithms and risk management techniques, they work behind the scenes across every corner of the industry.</p>
+      </div>
+
+      <!-- Marketing -->
+      <div class="career-card reveal" style="grid-column: span 1;">
+        <div class="career-cat">Marketing / Sales</div>
+        <div class="career-title">Sales</div>
+        <div class="career-salary">Median: $60,370</div>
+        <p class="career-desc">Two main types: agents (who sell on behalf of specific companies) and brokers (who connect buyers with carriers across the market). Both spend most of their time networking and closing deals, with flexible hours and client-facing roles.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="reveal">
+    <div class="label">Member Voices</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.05;">Our Members <em style="color:var(--gold);font-style:italic;">Speak</em></h2>
+  </div>
+
+  <div class="quote-grid">
+    <div class="quote-card reveal reveal-delay-1">
+      <div class="quote-mark">"</div>
+      <p class="quote-text">I joined GIS because I knew it was the best opportunity for me to learn about all of the opportunities in insurance, network with those in the field, and ultimately jump start me for a great career. I have made some of my best friends in college and have been able to excel both professionally and academically!</p>
+      <div class="quote-author">Daniel Sutherland — President</div>
+    </div>
+
+    <div class="quote-card reveal reveal-delay-2">
+      <div class="quote-mark">"</div>
+      <p class="quote-text">My favorite GIS memory is the annual conference in Hartford, Connecticut. I enjoyed the career fair where I got to network with tons of companies. I also liked learning about new insurance topics like gambling risk!</p>
+      <div class="quote-author">Dylan Asmus — Travel Chair</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--dark);padding:60px 24px;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center;">
+    <div class="gis-mark" style="font-family:'Playfair Display',serif;font-size:28px;color:var(--gold);">ΓΙΣ</div>
+    <div class="social-links" style="flex-direction:row;gap:24px;">
+      <a href="https://www.instagram.com/unlgis/" target="_blank" class="social-link">
+        <div class="social-icon">ig</div>
+        @unlgis
+      </a>
+      <a href="https://www.linkedin.com/company/unl-gamma-iota-sigma" target="_blank" class="social-link">
+        <div class="social-icon">in</div>
+        UNL Gamma Iota Sigma
+      </a>
+    </div>
+    <p style="font-size:12px;letter-spacing:1px;color:var(--muted);">© Gamma Iota Sigma, Gamma Iota Chapter · University of Nebraska–Lincoln</p>
+  </div>
+</footer>
+
+<script>
+  // no-op
