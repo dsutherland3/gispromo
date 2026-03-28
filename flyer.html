@@ -616,6 +616,81 @@ nav {
 }
 
 /* ═══════════════════════════════
+   MEMBER BENEFITS
+═══════════════════════════════ */
+.benefits-bg {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+
+.benefit-group {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 40px 36px;
+  position: relative;
+  transition: var(--transition), box-shadow 0.3s;
+}
+
+.benefit-group:hover {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-lg);
+}
+
+.benefit-group .deco-corner      { top:0; left:0; }
+.benefit-group .deco-corner.tr   { top:0; right:0; }
+
+.benefit-group-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--text);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.benefit-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.benefit-list li {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.benefit-list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.benefits-cta {
+  margin-top: 48px;
+  text-align: center;
+}
+
+/* ═══════════════════════════════
    FOOTER
 ═══════════════════════════════ */
 footer {
@@ -763,6 +838,7 @@ footer {
     gap: 40px;
   }
   .career-grid { grid-template-columns: 1fr 1fr; }
+  .benefits-grid { grid-template-columns: 1fr; }
   nav { padding: 0 20px; }
   .nav-links { gap: 20px; }
   .stats-inner { grid-template-columns: 1fr; }
@@ -791,6 +867,7 @@ footer {
   <div class="nav-mark">ΓΙΣ</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#benefits">Benefits</a></li>
     <li><a href="#careers">Careers</a></li>
     <li><a href="#voices">Voices</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -844,7 +921,7 @@ footer {
         <h2 class="section-title" id="about-heading">Insuring<br><em>Opportunity</em></h2>
         <div class="deco-line" aria-hidden="true"><span>◆</span></div>
         <p>Gamma Iota Sigma (ΓΙΣ) is a college academic fraternity, founded on April 16, 1966 at The Ohio State University in Columbus, Ohio.</p>
-        <p>We are organized to promote, encourage, and sustain student interest in insurance, risk management, and actuarial science as professions. We aim to encourage high moral and scholastic attainments and to facilitate the interaction and cooperation of educational institutions, industry, and professional organizations by fostering research, scholarship, and improved public relations. The Gamma Iota Chapter was chartered in 2019 and has since grown to over 40 members. Our chapter has been recognised as a superior chapter in 2023 and a distinguished chapter in 2025.</p>
+        <p>We are organized to promote, encourage, and sustain student interest in insurance, risk management, and actuarial science as professions. We aim to encourage high moral and scholastic attainments and to facilitate the interaction and cooperation of educational institutions, industry, and professional organizations by fostering research, scholarship, and improved public relations.</p>
       </div>
       <div class="about-callout" role="complementary" aria-label="Key fact">
         <div class="deco-corner" aria-hidden="true"></div>
@@ -852,7 +929,59 @@ footer {
         <div class="deco-corner bl" aria-hidden="true"></div>
         <div class="deco-corner br" aria-hidden="true"></div>
         <blockquote>Gamma Iota Sigma is recognized as the insurance industry's premier collegiate talent pipeline.</blockquote>
+        <cite>GIS National</cite>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBER BENEFITS -->
+<section id="benefits" class="benefits-bg" aria-labelledby="benefits-heading">
+  <div class="section-wrap">
+    <span class="section-label">Membership</span>
+    <h2 class="section-title" id="benefits-heading">Member <em>Benefits</em></h2>
+
+    <div class="benefits-grid">
+
+      <div class="benefit-group">
+        <div class="deco-corner" aria-hidden="true"></div>
+        <div class="deco-corner tr" aria-hidden="true"></div>
+        <div class="benefit-group-title">Actuarial Community</div>
+        <ul class="benefit-list">
+          <li>International Membership</li>
+          <li>Social Events</li>
+          <li>Mentorship</li>
+          <li>Philanthropy</li>
+        </ul>
+      </div>
+
+      <div class="benefit-group">
+        <div class="deco-corner" aria-hidden="true"></div>
+        <div class="deco-corner tr" aria-hidden="true"></div>
+        <div class="benefit-group-title">Professional Development</div>
+        <ul class="benefit-list">
+          <li>Industry Speakers</li>
+          <li>Company Visits</li>
+          <li>Scholarships</li>
+          <li>Technical Workshops</li>
+          <li>Local &amp; National Leadership Opportunities</li>
+        </ul>
+      </div>
+
+      <div class="benefit-group">
+        <div class="deco-corner" aria-hidden="true"></div>
+        <div class="deco-corner tr" aria-hidden="true"></div>
+        <div class="benefit-group-title">Larger Events</div>
+        <ul class="benefit-list">
+          <li>Conferences</li>
+          <li>National Programming</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="benefits-cta">
+      <a href="mailto:unlgammaiotasigma@gmail.com" class="btn btn-gold">Join GIS Today</a>
     </div>
   </div>
 </section>
@@ -921,7 +1050,7 @@ footer {
     <span class="section-label">Member Voices</span>
     <h2 class="section-title" id="voices-heading">Our Members <em>Speak</em></h2>
 
-    <div class="quotes-grid">
+    <div class="quotes-grid" style="grid-template-columns: repeat(3, 1fr);">
       <div class="quote-card">
         <div class="deco-corner" aria-hidden="true"></div>
         <div class="deco-corner tr" aria-hidden="true"></div>
@@ -930,7 +1059,6 @@ footer {
         <blockquote>"I joined GIS because I knew it was the best opportunity for me to learn about all of the opportunities in insurance, network with those in the field, and ultimately jump start me for a great career. I have made some of my best friends in college and have been able to excel both professionally and academically!"</blockquote>
         <cite>Daniel Sutherland — President</cite>
       </div>
-       <div class="quotes-grid">
       <div class="quote-card">
         <div class="deco-corner" aria-hidden="true"></div>
         <div class="deco-corner tr" aria-hidden="true"></div>
@@ -978,7 +1106,7 @@ footer {
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const btn = document.getElementById('themeBtn');
   const html = document.documentElement;
 
@@ -989,11 +1117,4 @@ footer {
     btn.textContent = '☾ Dark';
   }
 
-  btn.addEventListener('click', () => {
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    btn.textContent = isDark ? '☀ Light' : '☾ Dark';
-  });
-</script>
-</body>
-</html>
+  btn.addEventList
