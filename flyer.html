@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,9 +16,6 @@
   --gold-dim:   #8A6508;
   --gold-glow:  rgba(201,151,12,0.15);
   --transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
-}
-
-[data-theme="light"] {
   --bg:         #FAFAF7;
   --bg-card:    #FFFFFF;
   --bg-alt:     #F2F0EA;
@@ -31,21 +28,6 @@
   --border-strong: rgba(18,18,15,0.25);
   --shadow:     0 2px 24px rgba(0,0,0,0.06);
   --shadow-lg:  0 8px 48px rgba(0,0,0,0.10);
-}
-
-[data-theme="dark"] {
-  --bg:         #0E0E0C;
-  --bg-card:    #181815;
-  --bg-alt:     #141412;
-  --bg-invert:  #F5F0E8;
-  --text:       #F0EDE4;
-  --text-2:     #B8B4A8;
-  --text-3:     #706C60;
-  --text-invert:#12120F;
-  --border:     rgba(240,237,228,0.10);
-  --border-strong: rgba(240,237,228,0.22);
-  --shadow:     0 2px 24px rgba(0,0,0,0.40);
-  --shadow-lg:  0 8px 48px rgba(0,0,0,0.60);
 }
 
 /* ═══════════════════════════════
@@ -98,41 +80,14 @@ body {
 .deco-corner.br { bottom:0; right:0; transform: rotate(270deg); }
 
 /* ═══════════════════════════════
-   THEME TOGGLE
-═══════════════════════════════ */
-.theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 24px;
-  z-index: 100;
-  background: var(--bg-card);
-  border: 1px solid var(--border-strong);
-  color: var(--text);
-  padding: 8px 16px;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: var(--transition);
-  box-shadow: var(--shadow);
-}
-.theme-toggle:hover {
-  background: var(--gold);
-  color: var(--text-invert);
-  border-color: var(--gold);
-}
-
-/* ═══════════════════════════════
    NAV
 ═══════════════════════════════ */
 nav {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
+  background: #12120F;
+  border-bottom: 1px solid rgba(240,237,228,0.10);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -160,7 +115,7 @@ nav {
   font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--text-2);
+  color: rgba(240,237,228,0.55);
   text-decoration: none;
   transition: color 0.2s;
   padding-bottom: 2px;
@@ -803,6 +758,60 @@ footer {
 }
 
 /* ═══════════════════════════════
+   DARK SECTIONS
+═══════════════════════════════ */
+.section-dark {
+  background: #12120F;
+  color: #F0EDE4;
+}
+.section-dark .section-label { color: var(--gold); }
+.section-dark .section-title { color: #F0EDE4; }
+.section-dark .section-title em { color: var(--gold); }
+.section-dark .stat-block {
+  border-color: rgba(240,237,228,0.12);
+}
+.section-dark .stat-num { color: #F0EDE4; }
+.section-dark .stat-label { color: rgba(240,237,228,0.4); }
+.section-dark .stat-block::before { background: var(--gold); }
+
+.section-dark .benefit-group {
+  background: #1A1A16;
+  border-color: rgba(240,237,228,0.10);
+}
+.section-dark .benefit-group:hover {
+  border-color: var(--gold);
+  box-shadow: 0 8px 48px rgba(0,0,0,0.5);
+}
+.section-dark .benefit-group-title {
+  color: #F0EDE4;
+  border-bottom-color: rgba(240,237,228,0.10);
+}
+.section-dark .benefit-list li { color: rgba(240,237,228,0.65); }
+
+.section-dark .quote-card {
+  background: #1A1A16;
+  border-color: rgba(240,237,228,0.10);
+}
+.section-dark .quote-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 8px 48px rgba(0,0,0,0.5);
+}
+.section-dark .quote-card blockquote { color: #F0EDE4; }
+.section-dark nav {
+  background: #12120F;
+  border-bottom-color: rgba(240,237,228,0.10);
+}
+
+/* Nav dark */
+nav.nav-dark {
+  background: #12120F;
+  border-bottom-color: rgba(240,237,228,0.10);
+}
+nav.nav-dark .nav-mark { color: var(--gold); }
+nav.nav-dark .nav-links a { color: rgba(240,237,228,0.55); }
+nav.nav-dark .nav-links a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ═══════════════════════════════
    DIVIDER
 ═══════════════════════════════ */
 .gold-rule {
@@ -859,11 +868,8 @@ footer {
 </head>
 <body>
 
-<!-- THEME TOGGLE -->
-<button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">☀ Light</button>
-
 <!-- NAV -->
-<nav aria-label="Main navigation">
+<nav class="nav-dark" aria-label="Main navigation">
   <div class="nav-mark">ΓΙΣ</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -895,7 +901,7 @@ footer {
 </section>
 
 <!-- STATS -->
-<div class="stats-strip" aria-label="Chapter statistics">
+<div class="stats-strip section-dark" aria-label="Chapter statistics">
   <div class="stats-inner">
     <div class="stat-block">
       <div class="stat-num">1966</div>
@@ -936,7 +942,7 @@ footer {
 </section>
 
 <!-- MEMBER BENEFITS -->
-<section id="benefits" class="benefits-bg" aria-labelledby="benefits-heading">
+<section id="benefits" class="benefits-bg section-dark" aria-labelledby="benefits-heading">
   <div class="section-wrap">
     <span class="section-label">Membership</span>
     <h2 class="section-title" id="benefits-heading">Member <em>Benefits</em></h2>
@@ -981,7 +987,7 @@ footer {
     </div>
 
     <div class="benefits-cta">
-      <a href="mailto:unlgammaiotasigma@gmail.com" class="btn btn-gold">Contact Us</a>
+      <a href="#contact" class="btn btn-gold">Contact Us</a>
     </div>
   </div>
 </section>
@@ -1045,7 +1051,7 @@ footer {
 </section>
 
 <!-- TESTIMONIALS -->
-<section id="voices" aria-labelledby="voices-heading">
+<section id="voices" class="section-dark" aria-labelledby="voices-heading">
   <div class="section-wrap">
     <span class="section-label">Member Voices</span>
     <h2 class="section-title" id="voices-heading">Our Members <em>Speak</em></h2>
@@ -1106,15 +1112,5 @@ footer {
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const btn = document.getElementById('themeBtn');
-  const html = document.documentElement;
-
-  // Respect system preference on load
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (prefersDark) {
-    html.setAttribute('data-theme', 'dark');
-    btn.textContent = '☾ Dark';
-  }
-
-  btn.addEventList
+</body>
+</html>
